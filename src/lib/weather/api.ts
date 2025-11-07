@@ -78,5 +78,5 @@ export async function fetchForecastByCoords(
 }
 
 export function fetchWeatherIconUrl(icon: string): string {
-  return `${BASE_URL}/img/wn/${icon}@2x.png`;
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`;
 }
