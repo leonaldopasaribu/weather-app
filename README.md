@@ -26,7 +26,7 @@ A modern, responsive weather application built with Next.js that provides real-t
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) - React framework for production
+- **Framework:** [Next.js 16](https://nextjs.org/) - React framework for production
 - **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - **Testing:** [Jest](https://jestjs.io/) - JavaScript testing framework
