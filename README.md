@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌤️ Weather App
 
-## Getting Started
+A modern, responsive weather application built with Next.js that provides real-time weather information with a beautiful and intuitive interface.
 
-First, run the development server:
+## ✨ Features
+
+- 🌍 **Real-time Weather Data** - Get current weather conditions for any location
+- 📱 **Fully Responsive** - Perfect experience on desktop, tablet, and mobile devices
+- 🎨 **Beautiful UI** - Clean and modern interface with smooth animations
+- 🌡️ **Detailed Information** - Temperature, humidity, wind speed, and more
+- 🔍 **Location Search** - Easily search for weather in any city worldwide
+- ⚡ **Fast Performance** - Optimized with Next.js for lightning-fast load times
+- 🌙 **Theme Support** - Comfortable viewing experience
+
+## 📸 Screenshots
+
+### Desktop View
+<img width="1470" height="688" alt="Desktop Weather App" src="https://github.com/user-attachments/assets/dc8e381c-e5ea-4740-960a-2e8c4d41ab49" />
+
+### Mobile View
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/69cec894-282c-4004-8a2f-cb64145c0c0f" alt="Mobile Weather App" width="30%" />
+  <img src="https://github.com/user-attachments/assets/8a14245d-e8cb-4f76-ad39-42a285c892f8" alt="Mobile Weather Details" width="30%" />
+  <img src="https://github.com/user-attachments/assets/2cdbe8cb-43ee-4ed9-aef2-bf3ff8693b95" alt="Mobile Weather Search" width="30%" />
+</div>
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Next.js 15](https://nextjs.org/) - React framework for production
+- **Language:** [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **Testing:** [Jest](https://jestjs.io/) - JavaScript testing framework
+- **Package Manager:** [pnpm](https://pnpm.io/) - Fast, disk space efficient
+- **Font:** [Geist](https://vercel.com/font) - Optimized font by Vercel
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ installed
+- pnpm (recommended) or npm/yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/leonaldopasaribu/weather-app.git
+   cd weather-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   # or
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Add your API keys here
+   NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
+   ```
+
+4. **Run the development server**
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser**
+   
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 🧪 Testing
+
+Run the test suite:
 
 ```bash
-npm run dev
+pnpm test
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application uses:
+- **App Router** - Next.js 13+ app directory structure
+- **TypeScript** - Full type safety across the codebase
+- **Jest** - Unit and integration testing
+- **ESLint** - Code quality and consistency
+- **Prettier** - Code formatting
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Deployment
 
-## Learn More
+### Deploy on Vercel
 
-To learn more about Next.js, take a look at the following resources:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/leonaldopasaribu/weather-app)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Deploy on Vercel
+## 📚 Learn More
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To learn more about the technologies used in this project:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API
+- [Learn Next.js](https://nextjs.org/learn) - Interactive Next.js tutorial
+- [Tailwind CSS](https://tailwindcss.com/docs) - Utility-first CSS framework
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/) - TypeScript documentation
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👨‍💻 Author
+
+**Leonaldo Pasaribu**
+
+- GitHub: [@leonaldopasaribu](https://github.com/leonaldopasaribu)
+- LinkedIn: [Leonaldo Pasaribu](https://linkedin.com/in/leonaldo-pasaribu)
+
+---
+
+<div align="center">
+  Made with ❤️ using Next.js
+</div>
