@@ -1,4 +1,4 @@
-import type { ForecastData, DailyForecast } from "./types";
+import type { ForecastData, DailyForecast } from './types';
 
 export class WeatherUtil {
   static getForecastData(data: ForecastData): DailyForecast[] {
@@ -6,16 +6,16 @@ export class WeatherUtil {
 
     data.list.forEach((item) => {
       const date = new Date(item.dt * 1000);
-      const dateKey = date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
+      const dateKey = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
       });
 
       if (!dailyData[dateKey]) {
         dailyData[dateKey] = {
           date: dateKey,
-          day: date.toLocaleDateString("en-US", { weekday: "short" }),
+          day: date.toLocaleDateString('en-US', { weekday: 'short' }),
           temp_min: item.main.temp_min,
           temp_max: item.main.temp_max,
           description: item.weather[0].description,

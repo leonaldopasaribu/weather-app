@@ -1,5 +1,5 @@
-import axios, { HttpStatusCode, type AxiosError } from "axios";
-import type { WeatherData, ForecastData } from "./types";
+import axios, { HttpStatusCode, type AxiosError } from 'axios';
+import type { WeatherData, ForecastData } from './types';
 
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 const BASE_URL = process.env.NEXT_PUBLIC_OPENWEATHER_API_URL;
@@ -8,7 +8,7 @@ const weatherApi = axios.create({
   baseURL: BASE_URL,
   params: {
     appid: API_KEY,
-    units: "metric",
+    units: 'metric',
   },
   timeout: 10_000,
 });
@@ -20,10 +20,10 @@ weatherApi.interceptors.response.use(
       const status = error.response.status;
 
       const errorMessages: Record<number, string> = {
-        [HttpStatusCode.NotFound]: "Location not found",
-        [HttpStatusCode.Unauthorized]: "Invalid API key",
+        [HttpStatusCode.NotFound]: 'Location not found',
+        [HttpStatusCode.Unauthorized]: 'Invalid API key',
         [HttpStatusCode.TooManyRequests]:
-          "Too many requests. Please try again later",
+          'Too many requests. Please try again later',
       };
 
       const message =
@@ -32,15 +32,15 @@ weatherApi.interceptors.response.use(
     }
 
     if (error.request) {
-      throw new Error("No response from weather service");
+      throw new Error('No response from weather service');
     }
 
-    throw new Error("Failed to fetch weather data");
+    throw new Error('Failed to fetch weather data');
   }
 );
 
 export async function fetchWeatherByCity(city: string): Promise<WeatherData> {
-  const { data } = await weatherApi.get<WeatherData>("/data/2.5/weather", {
+  const { data } = await weatherApi.get<WeatherData>('/data/2.5/weather', {
     params: { q: city },
   });
 
@@ -51,7 +51,7 @@ export async function fetchWeatherByCoords(
   lat: number,
   lon: number
 ): Promise<WeatherData> {
-  const { data } = await weatherApi.get<WeatherData>("/data/2.5/weather", {
+  const { data } = await weatherApi.get<WeatherData>('/data/2.5/weather', {
     params: { lat, lon },
   });
 
@@ -59,7 +59,7 @@ export async function fetchWeatherByCoords(
 }
 
 export async function fetchForecastByCity(city: string): Promise<ForecastData> {
-  const { data } = await weatherApi.get<ForecastData>("/data/2.5/forecast", {
+  const { data } = await weatherApi.get<ForecastData>('/data/2.5/forecast', {
     params: { q: city },
   });
 
@@ -70,7 +70,7 @@ export async function fetchForecastByCoords(
   lat: number,
   lon: number
 ): Promise<ForecastData> {
-  const { data } = await weatherApi.get<ForecastData>("/data/2.5/forecast", {
+  const { data } = await weatherApi.get<ForecastData>('/data/2.5/forecast', {
     params: { lat, lon },
   });
 
