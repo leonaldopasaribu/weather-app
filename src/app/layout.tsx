@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const geistSans = Geist({
@@ -14,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
+    default:
+      'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
     template: '%s | The Weather Channel',
   },
   description:
@@ -53,7 +55,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://weather-app-leonaldo.vercel.app',
-    title: 'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
+    title:
+      'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
     description:
       'Get accurate weather forecasts, real-time updates, and 7-day weather predictions for any city worldwide. Check current temperature, humidity, wind speed, and detailed weather conditions.',
     siteName: 'The Weather Channel',
@@ -124,6 +127,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
