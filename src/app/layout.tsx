@@ -47,14 +47,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://weather-app-leonaldo.vercel.app'),
+  metadataBase: new URL('https://weather-app-leonaldo-pasaribu.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://weather-app-leonaldo.vercel.app',
+    url: 'https://weather-app-leonaldo-pasaribu.vercel.app',
     title:
       'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
     description:
@@ -96,7 +96,7 @@ export default function RootLayout({
     name: 'The Weather Channel',
     description:
       'Get accurate weather forecasts, real-time updates, and 7-day weather predictions for any city worldwide.',
-    url: 'https://weather-app-leonaldo.vercel.app',
+    url: 'https://weather-app-leonaldo-pasaribu.vercel.app',
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web',
     offers: {
