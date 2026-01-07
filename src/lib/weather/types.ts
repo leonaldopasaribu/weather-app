@@ -58,3 +58,13 @@ export interface DailyForecast {
   humidity: number;
   wind_speed: number;
 }
+
+export interface HourlyForecast {
+  time: string;
+  temp: number;
+  description: string;
+  icon: string;
+  humidity: number;
+  wind_speed: number;
+  dt: number;
+}
