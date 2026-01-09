@@ -7,8 +7,10 @@ export class WeatherBackgroundUtil {
       // Default background
       return {
         background: isDark
-          ? 'linear-gradient(to bottom right, #1a1a2e, #16213e, #0f3460)'
-          : 'linear-gradient(to bottom right, #667eea, #764ba2, #f093fb)',
+          ? 'linear-gradient(135deg, #050a1e 0%, #0f1729 50%, #1a1e35 100%)'
+          : 'linear-gradient(135deg, #6366f1 0%, #3b82f6 50%, #06b6d4 100%)',
+        backgroundSize: '200% 200%',
+        animation: 'gradient 15s ease infinite',
       };
     }
 
