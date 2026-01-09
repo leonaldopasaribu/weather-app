@@ -11,7 +11,7 @@ import {
   fetchForecastByCoords,
   WeatherUtil,
 } from '@/src/lib/weather';
-import { ThemeUtil } from '@/src/utils/theme';
+import { ThemeUtil, WeatherBackgroundUtil } from '@/src/utils';
 import {
   ThemeToggleButton,
   WelcomeHeader,
@@ -109,8 +109,17 @@ export default function Home() {
     );
   };
 
+  const weatherCondition = weather?.weather[0]?.main;
+  const backgroundStyle = WeatherBackgroundUtil.getBackgroundStyle(
+    weatherCondition,
+    isDark
+  );
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-indigo-500/90 via-blue-500 to-cyan-500/90 p-2 font-sans transition-all duration-500 sm:p-4 md:p-6 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950">
+    <div
+      className="min-h-screen p-2 font-sans transition-all duration-500 sm:p-4 md:p-6"
+      style={backgroundStyle}
+    >
       <ThemeToggleButton isDark={isDark} onToggle={handleToggleTheme} />
 
       <main className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center py-6 sm:py-12">
