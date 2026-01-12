@@ -1,17 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import {
-  WeatherData,
-  DailyForecast,
-  HourlyForecast,
-  fetchWeatherByCity,
-  fetchForecastByCity,
-  fetchWeatherByCoords,
-  fetchForecastByCoords,
-  WeatherUtil,
-} from '@/src/lib/weather';
-import { ThemeUtil, WeatherBackgroundUtil } from '@/src/utils';
+import { WeatherBackgroundUtil } from '@/src/utils';
 import {
   ThemeToggleButton,
   WelcomeHeader,
@@ -22,92 +11,22 @@ import {
   CurrentWeatherCard,
   DailyForecast as DailyForecastComponent,
 } from '@/src/components';
+import { useWeather, useTheme } from '@/src/hooks';
 
 export default function Home() {
-  const [city, setCity] = useState('');
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [forecast, setForecast] = useState<DailyForecast[]>([]);
-  const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [isDark, setIsDark] = useState(false);
+  const {
+    city,
+    setCity,
+    weather,
+    forecast,
+    hourlyForecast,
+    isLoading,
+    error,
+    handleSearch,
+    handleGetCurrentLocation,
+  } = useWeather();
 
-  useEffect(() => {
-    const initialTheme = ThemeUtil.initializeTheme();
-    setIsDark(initialTheme);
-  }, []);
-
-  const handleToggleTheme = () => {
-    const newTheme = ThemeUtil.toggleTheme(isDark);
-    setIsDark(newTheme);
-  };
-
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!city.trim()) return;
-
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const [weatherData, forecastData] = await Promise.all([
-        fetchWeatherByCity(city),
-        fetchForecastByCity(city),
-      ]);
-      setWeather(weatherData);
-      setForecast(WeatherUtil.getForecastData(forecastData));
-      setHourlyForecast(WeatherUtil.getHourlyForecast(forecastData));
-    } catch (err) {
-      setError('City not found. Please try again.');
-      setWeather(null);
-      setForecast([]);
-      setHourlyForecast([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGetCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      setError('Geolocation is not supported by your browser');
-      return;
-    }
-
-    setIsLoading(true);
-    setError('');
-
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const [weatherData, forecastData] = await Promise.all([
-            fetchWeatherByCoords(
-              position.coords.latitude,
-              position.coords.longitude
-            ),
-            fetchForecastByCoords(
-              position.coords.latitude,
-              position.coords.longitude
-            ),
-          ]);
-          setWeather(weatherData);
-          setForecast(WeatherUtil.getForecastData(forecastData));
-          setHourlyForecast(WeatherUtil.getHourlyForecast(forecastData));
-          setCity(weatherData.name);
-        } catch (err) {
-          setError('Unable to fetch weather data');
-          setWeather(null);
-          setForecast([]);
-          setHourlyForecast([]);
-        } finally {
-          setIsLoading(false);
-        }
-      },
-      (err) => {
-        setError('Unable to retrieve your location');
-        setIsLoading(false);
-      }
-    );
-  };
+  const { isDark, toggleTheme } = useTheme();
 
   const weatherCondition = weather?.weather[0]?.main;
   const backgroundStyle = WeatherBackgroundUtil.getBackgroundStyle(
@@ -120,7 +39,7 @@ export default function Home() {
       className="min-h-screen p-2 font-sans transition-all duration-500 sm:p-4 md:p-6"
       style={backgroundStyle}
     >
-      <ThemeToggleButton isDark={isDark} onToggle={handleToggleTheme} />
+      <ThemeToggleButton isDark={isDark} onToggle={toggleTheme} />
 
       <main className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center py-6 sm:py-12">
         {!weather && !isLoading && <WelcomeHeader />}

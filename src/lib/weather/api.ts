@@ -1,8 +1,9 @@
 import axios, { HttpStatusCode, type AxiosError } from 'axios';
 import type { WeatherData, ForecastData } from './types';
+import { env } from '../env';
 
-const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
-const BASE_URL = process.env.NEXT_PUBLIC_OPENWEATHER_API_URL;
+const API_KEY = env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+const BASE_URL = env.NEXT_PUBLIC_OPENWEATHER_API_URL;
 
 const weatherApi = axios.create({
   baseURL: BASE_URL,
