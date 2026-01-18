@@ -1,4 +1,7 @@
-import { Loader2, LocateFixed, Search } from 'lucide-react';
+'use client';
+
+import { motion } from 'framer-motion';
+import { Loader2, MapPin, Search, Navigation } from 'lucide-react';
 
 interface SearchFormProps {
   city: string;
@@ -16,47 +19,64 @@ export default function SearchForm({
   onGetCurrentLocation,
 }: SearchFormProps) {
   return (
-    <>
-      <form onSubmit={onSubmit} className="mb-4 sm:mb-6">
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <label htmlFor="city-search" className="sr-only">
-            Search for a city
-          </label>
+    <div className="mx-auto mb-10 w-full max-w-2xl px-2">
+      <form onSubmit={onSubmit} className="relative">
+        <div className="group relative flex items-center transition-all duration-500">
+          
+          {/* Label Floating / Icon Decor */}
+          <div className="absolute left-6 z-10 text-gray-400 group-focus-within:text-indigo-500 transition-colors duration-300">
+            <MapPin size={22} strokeWidth={2.5} />
+          </div>
+
           <input
             id="city-search"
             type="text"
             value={city}
             onChange={(e) => onCityChange(e.target.value)}
-            placeholder="Search for a city..."
-            aria-label="Search for a city"
-            aria-describedby="search-hint"
-            className="flex-1 rounded-xl border border-gray-300 px-4 py-2.5 text-base text-gray-800 shadow-inner focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 focus:outline-none sm:px-5 sm:py-3 sm:text-lg dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            placeholder="Search city..."
+            className="w-full rounded-[2.5rem] border-0 bg-white/40 py-5 pl-16 pr-32 text-xl font-medium tracking-tight text-gray-800 ring-1 ring-gray-200/50 backdrop-blur-3xl transition-all placeholder:text-gray-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 dark:bg-gray-900/40 dark:text-white dark:ring-gray-700/50 dark:focus:bg-gray-900 dark:focus:ring-indigo-500/20"
           />
-          <button
-            type="submit"
-            disabled={isLoading}
-            aria-label={isLoading ? 'Fetching weather data' : 'Search for weather'}
-            className="flex items-center justify-center gap-2 rounded-xl bg-indigo-500 px-6 py-2.5 font-semibold whitespace-nowrap text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-indigo-600 disabled:cursor-not-allowed disabled:opacity-50 sm:py-3"
-          >
-            {isLoading ? (
-              <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
-            ) : (
-              <Search className="h-5 w-5" aria-hidden="true" />
-            )}
-            {isLoading ? 'Fetching...' : 'Search'}
-          </button>
+
+          {/* Action Group: Buttons inside Input */}
+          <div className="absolute right-2.5 flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={onGetCurrentLocation}
+              disabled={isLoading}
+              className="flex h-12 w-12 items-center justify-center rounded-full text-gray-400 transition-all hover:bg-gray-100 hover:text-indigo-600 dark:hover:bg-gray-800"
+              title="Locate me"
+            >
+              <Navigation size={20} className={isLoading ? 'animate-pulse' : ''} />
+            </button>
+
+            <button
+              type="submit"
+              disabled={isLoading || !city}
+              className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-700 active:scale-95 disabled:grayscale"
+            >
+              {isLoading ? (
+                <Loader2 size={20} className="animate-spin" />
+              ) : (
+                <Search size={20} strokeWidth={3} />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Subtle Decorative Hint */}
+        <div className="mt-4 flex justify-center gap-6 opacity-40">
+           {['London', 'New York', 'Tokyo', 'Paris'].map((fav) => (
+             <button
+                key={fav}
+                type="button"
+                onClick={() => onCityChange(fav)}
+                className="text-[10px] font-bold uppercase tracking-[0.2em] hover:text-indigo-500 transition-colors"
+             >
+               {fav}
+             </button>
+           ))}
         </div>
       </form>
-
-      <button
-        onClick={onGetCurrentLocation}
-        disabled={isLoading}
-        aria-label="Use current location to get weather"
-        className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-indigo-500 px-4 py-2.5 text-base font-semibold text-indigo-600 transition-all duration-300 hover:scale-[1.01] hover:bg-indigo-50 disabled:cursor-not-allowed disabled:opacity-50 sm:mb-6 sm:px-6 sm:py-3 sm:text-lg dark:text-indigo-400 dark:hover:border-indigo-400 dark:hover:bg-gray-800/50"
-      >
-        <LocateFixed className="h-5 w-5" aria-hidden="true" />
-        <span className="text-sm sm:text-base">Use Current Location</span>
-      </button>
-    </>
+    </div>
   );
 }

@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Wind, Info, AlertCircle } from 'lucide-react';
 import type { AirQualityInfo } from '@/src/lib/weather/types';
 
 interface AirQualityProps {
@@ -5,96 +9,94 @@ interface AirQualityProps {
 }
 
 export default function AirQuality({ airQuality }: AirQualityProps) {
-  const { aqi, label, description, color, components } = airQuality;
+  const { aqi, label, description, color } = airQuality;
 
-  const pollutants = [
-    {
-      name: 'PM2.5',
-      value: components.pm2_5,
-      unit: 'μg/m³',
-      key: 'pm2_5',
-      icon: '🔴',
-    },
-    {
-      name: 'PM10',
-      value: components.pm10,
-      unit: 'μg/m³',
-      key: 'pm10',
-      icon: '🟠',
-    },
-    { name: 'O₃', value: components.o3, unit: 'μg/m³', key: 'o3', icon: '🔵' },
-    {
-      name: 'NO₂',
-      value: components.no2,
-      unit: 'μg/m³',
-      key: 'no2',
-      icon: '🟡',
-    },
-    {
-      name: 'SO₂',
-      value: components.so2,
-      unit: 'μg/m³',
-      key: 'so2',
-      icon: '🟣',
-    },
-    { name: 'CO', value: components.co, unit: 'μg/m³', key: 'co', icon: '⚫' },
-  ];
+  // Kalkulasi persentase untuk progress bar (skala 1-5)
+  const progressWidth = (aqi / 5) * 100;
 
   return (
-    <div className="mt-6 mb-6 sm:mt-8 sm:mb-8">
-      <div className="rounded-2xl bg-white/95 p-4 shadow-2xl backdrop-blur-md sm:rounded-4xl sm:p-6 md:p-8 dark:bg-gray-900/95 dark:shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
-        {/* Header */}
-        <div className="mb-4 flex items-center justify-between sm:mb-6">
-          <div>
-            <h3 className="text-xl font-bold text-gray-800 sm:text-2xl md:text-3xl dark:text-white">
-              Air Quality
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="group relative overflow-hidden rounded-[2rem] bg-white/80 p-1 shadow-2xl backdrop-blur-xl dark:bg-gray-900/80"
+    >
+      {/* Glow Effect Background */}
+      <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full blur-3xl opacity-20 transition-colors duration-500 ${color.split(' ')[0]}`} />
+      
+      <div className="relative z-10 p-6 sm:p-8">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+              <Wind size={24} />
+            </div>
+            <h3 className="text-xl font-bold tracking-tight text-gray-800 dark:text-white">
+              Air Quality Index
             </h3>
-            <p className="mt-1 text-sm text-gray-600 sm:text-base dark:text-gray-400">
-              {description}
-            </p>
           </div>
-          <div className="flex flex-col items-end">
-            <div
-              className={`rounded-lg px-3 py-1 text-sm font-bold shadow-lg sm:px-4 sm:py-2 sm:text-base ${color}`}
-            >
-              {label}
+          <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500">
+            Live Updates
+          </span>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-[1fr_auto]">
+          <div className="space-y-6">
+            <div>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-6xl font-black tracking-tighter text-gray-900 dark:text-white">
+                  {aqi}
+                </span>
+                <span className={`text-lg font-bold uppercase tracking-wider ${color.replace('bg-', 'text-')}`}>
+                  • {label}
+                </span>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
+                {description}
+              </p>
             </div>
-            <div className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-              AQI: {aqi}
+
+            {/* Visual Meter */}
+            <div className="space-y-2">
+              <div className="h-3 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progressWidth}%` }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                  className={`h-full rounded-full shadow-[0_0_12px_rgba(0,0,0,0.1)] ${color}`}
+                />
+              </div>
+              <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <span>Good</span>
+                <span>Moderate</span>
+                <span>Unhealthy</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Side Badge/Metric */}
+          <div className="hidden md:flex flex-col items-center justify-center border-l border-gray-100 dark:border-gray-800 pl-8">
+            <div className="text-center">
+              <div className="text-xs font-bold text-gray-400 uppercase mb-1">Scale</div>
+              <div className="relative h-16 w-16 flex items-center justify-center rounded-full border-4 border-indigo-500/20">
+                <span className="text-xl font-bold text-indigo-500">1-5</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Pollutants Grid */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-6">
-          {pollutants.map((pollutant) => (
-            <div
-              key={pollutant.key}
-              className="flex transform cursor-pointer flex-col items-center rounded-xl bg-gradient-to-br from-white to-indigo-50 p-3 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-4 dark:from-gray-800 dark:to-gray-700"
-            >
-              <p className="mb-2 text-xs font-bold text-gray-900 sm:text-sm dark:text-white">
-                {pollutant.name}
-              </p>
-              <p className="my-1 text-3xl">{pollutant.icon}</p>
-              <p className="my-2 text-2xl font-extrabold text-indigo-600 sm:text-3xl dark:text-indigo-400">
-                {pollutant.value.toFixed(1)}
-              </p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                {pollutant.unit}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Info Footer */}
-        <div className="mt-4 rounded-xl bg-blue-50 p-3 sm:mt-6 sm:p-4 dark:bg-gray-800">
-          <p className="text-xs text-gray-700 sm:text-sm dark:text-gray-300">
-            💡 <span className="font-semibold">Tip:</span> Air quality data is
-            based on the Air Quality Index (AQI) scale from 1 (Good) to 5 (Very
-            Poor).
+        {/* Dynamic Tip Section */}
+        <div className="mt-8 flex gap-3 rounded-2xl bg-indigo-50/50 p-4 border border-indigo-100/50 dark:bg-indigo-500/5 dark:border-indigo-500/10">
+          <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
+            <Info size={18} />
+          </div>
+          <p className="text-sm leading-snug text-gray-600 dark:text-gray-300">
+            <span className="font-bold text-indigo-900 dark:text-indigo-200">Health Tip:</span> {
+              aqi <= 2 
+              ? "A perfect day for outdoor activities. Enjoy the fresh air!" 
+              : "Sensitive groups should reduce prolonged outdoor exertion."
+            }
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

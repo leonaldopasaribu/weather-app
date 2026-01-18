@@ -7,9 +7,9 @@ import {
   SearchForm,
   ErrorMessage,
   LoadingSkeleton,
-  HourlyForecast as HourlyForecastComponent,
+  HourlyForecast,
   CurrentWeatherCard,
-  DailyForecast as DailyForecastComponent,
+  DailyForecast,
   AirQuality,
 } from '@/src/components';
 import { useWeather, useTheme } from '@/src/hooks';
@@ -86,11 +86,11 @@ export default function Home() {
           {weather && <CurrentWeatherCard weather={weather} />}
 
           {weather && hourlyForecast.length > 0 && (
-            <HourlyForecastComponent hourlyForecast={hourlyForecast} />
+            <HourlyForecast hourlyForecast={hourlyForecast} />
           )}
 
           {weather && forecast.length > 0 && (
-            <DailyForecastComponent forecast={forecast} />
+            <DailyForecast forecast={forecast} />
           )}
 
           {weather && airQuality && <AirQuality airQuality={airQuality} />}
