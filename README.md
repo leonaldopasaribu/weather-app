@@ -88,6 +88,67 @@ pnpm test
 npm test
 ```
 
+## 📦 Versioning & Releases
+
+This project uses [standard-version](https://github.com/conventional-changelog/standard-version) for automated versioning and changelog generation.
+
+### Commit Message Format
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+**Types:**
+- `feat:` - A new feature
+- `fix:` - A bug fix
+- `docs:` - Documentation changes
+- `style:` - Code style changes (formatting, semicolons, etc.)
+- `refactor:` - Code refactoring
+- `perf:` - Performance improvements
+- `test:` - Adding or updating tests
+- `chore:` - Build process or auxiliary tool changes
+
+**Examples:**
+```bash
+feat(air-quality): add Air Quality API integration
+fix(weather): correct temperature display issue
+docs(readme): update installation instructions
+```
+
+### Creating a Release
+
+```bash
+# Automatically determine version bump based on commits
+pnpm release
+
+# Create a specific version bump
+pnpm release:patch  # 0.1.0 → 0.1.1
+pnpm release:minor  # 0.1.0 → 0.2.0
+pnpm release:major  # 0.1.0 → 1.0.0
+
+# First release (for new projects)
+pnpm release:first
+```
+
+### What happens during a release:
+
+1. ✅ Bumps version in `package.json`
+2. ✅ Generates/updates `CHANGELOG.md`
+3. ✅ Creates a git commit
+4. ✅ Creates a git tag
+
+### Push your release:
+
+```bash
+git push --follow-tags origin main
+```
+
 ## 📝 Development
 
 The application uses:
