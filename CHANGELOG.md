@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.2...v0.1.3) (2026-01-18)
+
+
+### Bug Fixes
+
+* improve error handling and timeout for current location feature ([0cd18ab](https://github.com/leonaldopasaribu/weather-app/commit/0cd18ab97e26d80326ca4ec586c7dea2c588f42c))
+
 ### [0.1.2](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.1...v0.1.2) (2026-01-18)
 
 
