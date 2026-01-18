@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.1...v0.1.2) (2026-01-18)
+
+
+### Chores
+
+* setup standard version ([cdae027](https://github.com/leonaldopasaribu/weather-app/commit/cdae02761c4704ecd3c8ccc627ea7c556fd892d8))
+
 ### 0.1.1 (2026-01-18)
 
 
