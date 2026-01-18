@@ -1,5 +1,6 @@
 export { default as ThemeToggleButton } from './ThemeToggleButton';
 export { default as WelcomeHeader } from './WelcomeHeader';
+export { default as AirQuality } from './AirQuality';
 export { default as SearchForm } from './SearchForm';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as LoadingSkeleton } from './LoadingSkeleton';

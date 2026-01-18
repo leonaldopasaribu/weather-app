@@ -1,4 +1,10 @@
-import type { ForecastData, DailyForecast, HourlyForecast } from './types';
+import type {
+  ForecastData,
+  DailyForecast,
+  HourlyForecast,
+  AirPollutionData,
+  AirQualityInfo,
+} from './types';
 
 export class WeatherUtil {
   static getHourlyForecast(data: ForecastData): HourlyForecast[] {
@@ -91,5 +97,52 @@ export class WeatherUtil {
         wind_speed: Math.round(day.wind_speed / day.count),
       }))
       .slice(0, 7);
+  }
+
+  static getAirQualityInfo(data: AirPollutionData): AirQualityInfo | null {
+    if (!data.list || data.list.length === 0) {
+      return null;
+    }
+
+    const airData = data.list[0];
+    const aqi = airData.main.aqi;
+
+    const aqiInfo: Record<number, { label: string; description: string; color: string }> = {
+      1: {
+        label: 'Good',
+        description: 'Air quality is satisfactory, and air pollution poses little or no risk.',
+        color: 'bg-green-500',
+      },
+      2: {
+        label: 'Fair',
+        description: 'Air quality is acceptable. However, there may be a risk for some people.',
+        color: 'bg-lime-500',
+      },
+      3: {
+        label: 'Moderate',
+        description: 'Members of sensitive groups may experience health effects.',
+        color: 'bg-yellow-500',
+      },
+      4: {
+        label: 'Poor',
+        description: 'Health alert: everyone may experience more serious health effects.',
+        color: 'bg-orange-500',
+      },
+      5: {
+        label: 'Very Poor',
+        description: 'Health warning of emergency conditions. Everyone is more likely to be affected.',
+        color: 'bg-red-500',
+      },
+    };
+
+    const info = aqiInfo[aqi] || aqiInfo[3];
+
+    return {
+      aqi,
+      label: info.label,
+      description: info.description,
+      color: info.color,
+      components: airData.components,
+    };
   }
 }

@@ -1,5 +1,5 @@
 import axios, { HttpStatusCode, type AxiosError } from 'axios';
-import type { WeatherData, ForecastData } from './types';
+import type { WeatherData, ForecastData, AirPollutionData } from './types';
 import { env } from '../env';
 
 const API_KEY = env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
@@ -74,6 +74,20 @@ export async function fetchForecastByCoords(
   const { data } = await weatherApi.get<ForecastData>('/data/2.5/forecast', {
     params: { lat, lon },
   });
+
+  return data;
+}
+
+export async function fetchAirPollutionByCoords(
+  lat: number,
+  lon: number
+): Promise<AirPollutionData> {
+  const { data } = await weatherApi.get<AirPollutionData>(
+    '/data/2.5/air_pollution',
+    {
+      params: { lat, lon },
+    }
+  );
 
   return data;
 }

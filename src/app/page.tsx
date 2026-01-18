@@ -10,6 +10,7 @@ import {
   HourlyForecast as HourlyForecastComponent,
   CurrentWeatherCard,
   DailyForecast as DailyForecastComponent,
+  AirQuality,
 } from '@/src/components';
 import { useWeather, useTheme } from '@/src/hooks';
 
@@ -20,6 +21,7 @@ export default function Home() {
     weather,
     forecast,
     hourlyForecast,
+    airQuality,
     isLoading,
     error,
     handleSearch,
@@ -90,6 +92,8 @@ export default function Home() {
           {weather && forecast.length > 0 && (
             <DailyForecastComponent forecast={forecast} />
           )}
+
+          {weather && airQuality && <AirQuality airQuality={airQuality} />}
         </div>
       </main>
     </div>
