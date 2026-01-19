@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.4...v0.1.5) (2026-01-19)
+
+
+### Features
+
+* add navigation header for flexibility access all menu ([88afe8d](https://github.com/leonaldopasaribu/weather-app/commit/88afe8da513c59951ce9353570ce5315d1016ecf))
+
 ### [0.1.4](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.3...v0.1.4) (2026-01-18)
 
 
