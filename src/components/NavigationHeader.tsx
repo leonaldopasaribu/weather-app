@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Calendar, Wind } from 'lucide-react';
 
 interface NavigationHeaderProps {
@@ -10,54 +11,73 @@ interface NavigationHeaderProps {
 export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
   const [activeSection, setActiveSection] = useState<string>('hourly');
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
-
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  if (!isVisible) return null;
-
   const navItems = [
     { id: 'hourly', label: 'Hourly', Icon: Clock },
     { id: 'daily', label: 'Daily', Icon: Calendar },
     { id: 'air-quality', label: 'Air Quality', Icon: Wind },
   ];
 
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="sticky top-0 z-40 mb-6 flex justify-center sm:mb-8">
-      <div className="inline-flex rounded-2xl bg-white/95 shadow-lg backdrop-blur-md sm:rounded-3xl dark:bg-gray-900/95">
-        <div className="flex flex-wrap items-center gap-2 p-3 sm:gap-3 sm:p-4">
-          {navItems.map((item) => {
-            const IconComponent = item.Icon;
-            return (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:px-5 sm:py-3 sm:text-base ${
-                  activeSection === item.id
-                    ? 'bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
-                }`}
-                aria-label={`Navigate to ${item.label} section`}
-              >
-                <IconComponent size={18} className="sm:h-5 sm:w-5" />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </nav>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.nav
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -50, opacity: 0 }}
+          className="sticky top-6 z-50 mb-10 flex justify-center px-4"
+        >
+          <div className="relative flex items-center gap-1 overflow-hidden rounded-4xl bg-white/70 p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] ring-1 ring-black/5 backdrop-blur-2xl dark:bg-gray-900/80 dark:ring-white/10">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.id;
+              const Icon = item.Icon;
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-300 ${
+                    isActive
+                      ? 'text-white'
+                      : 'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+                  }`}
+                >
+                  {/* Animated Background Pill */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 z-0 rounded-full bg-linear-to-r from-indigo-600 to-blue-600 shadow-lg shadow-blue-500/30"
+                      transition={{
+                        type: 'spring',
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
+                    />
+                  )}
+
+                  <Icon size={18} className="relative z-10" />
+                  <span className="relative z-10 hidden sm:inline">
+                    {item.label}
+                  </span>
+                  <span className="relative z-10 sm:hidden">
+                    {isActive ? item.label : ''}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 }
