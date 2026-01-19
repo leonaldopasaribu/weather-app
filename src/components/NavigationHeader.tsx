@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Clock, Calendar, Wind } from 'lucide-react';
 
 interface NavigationHeaderProps {
@@ -8,33 +8,11 @@ interface NavigationHeaderProps {
 }
 
 export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
-  const [activeSection, setActiveSection] = useState<string>('');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hourly', 'daily', 'air-quality'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [activeSection, setActiveSection] = useState<string>('hourly');
 
   const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+
     const element = document.getElementById(sectionId);
     if (element) {
       const offset = 100;
@@ -68,7 +46,7 @@ export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-300 sm:px-5 sm:py-3 sm:text-base ${
                   activeSection === item.id
-                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md'
+                    ? 'bg-linear-to-r from-blue-500 to-blue-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
                 }`}
                 aria-label={`Navigate to ${item.label} section`}
