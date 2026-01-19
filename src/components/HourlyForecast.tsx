@@ -12,7 +12,7 @@ interface HourlyForecastProps {
 
 export default function HourlyForecast({ hourlyForecast }: HourlyForecastProps) {
   return (
-    <div className="mb-8 group">
+    <div id="hourly" className="mb-8 group">
       <div className="relative overflow-hidden rounded-[2.5rem] bg-white/70 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] backdrop-blur-2xl dark:bg-gray-900/80 dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] border border-white/20 dark:border-gray-800">
         
         {/* Header Section */}

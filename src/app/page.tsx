@@ -11,6 +11,7 @@ import {
   CurrentWeatherCard,
   DailyForecast,
   AirQuality,
+  NavigationHeader,
 } from '@/src/components';
 import { useWeather, useTheme } from '@/src/hooks';
 
@@ -80,6 +81,13 @@ export default function Home() {
               </div>
             )}
           </div>
+
+          <NavigationHeader
+            isVisible={Boolean(
+              weather &&
+                (hourlyForecast.length > 0 || forecast.length > 0 || airQuality)
+            )}
+          />
 
           {isLoading && <LoadingSkeleton />}
 

@@ -16,6 +16,7 @@ export default function AirQuality({ airQuality }: AirQualityProps) {
 
   return (
     <motion.div 
+      id="air-quality"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="group relative overflow-hidden rounded-[2rem] bg-white/80 p-1 shadow-2xl backdrop-blur-xl dark:bg-gray-900/80"

@@ -12,7 +12,7 @@ interface DailyForecastProps {
 
 export default function DailyForecast({ forecast }: DailyForecastProps) {
   return (
-    <div className="group mb-8 w-full">
+    <div id="daily" className="group mb-8 w-full">
       <div className="relative overflow-hidden rounded-[2.5rem] border border-white/20 bg-white/70 p-6 shadow-2xl backdrop-blur-2xl dark:border-gray-800 dark:bg-gray-900/80">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between px-2">
