@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.5...v0.1.6) (2026-01-19)
+
+
+### Code Refactoring
+
+* simplify NavigationHeader by removing unused scroll effect ([a096192](https://github.com/leonaldopasaribu/weather-app/commit/a096192d07d557b97f81b33d9b8612c2763aa293))
+
 ### [0.1.5](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.4...v0.1.5) (2026-01-19)
 
 
