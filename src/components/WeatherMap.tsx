@@ -16,20 +16,21 @@ import {
 } from 'lucide-react';
 import { env } from '@/src/lib/env';
 
-const customIcon =
-  typeof window !== 'undefined'
-    ? new L.Icon({
-        iconUrl:
-          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-        iconRetinaUrl:
-          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-        shadowUrl:
-          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-      })
-    : null;
+function getCustomIcon() {
+  if (typeof window === 'undefined') return undefined;
+
+  return new L.Icon({
+    iconUrl:
+      'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+    iconRetinaUrl:
+      'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+    shadowUrl:
+      'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+}
 
 // --- Sub-Components ---
 function MapUpdater({ center }: { center: [number, number] }) {
@@ -42,21 +43,24 @@ function MapUpdater({ center }: { center: [number, number] }) {
 
 function ZoomControls() {
   const map = useMap();
+
+  const controls = [
+    { icon: ZoomIn, action: () => map.zoomIn(), label: 'Zoom In' },
+    { icon: ZoomOut, action: () => map.zoomOut(), label: 'Zoom Out' },
+  ];
+
   return (
-    <div className="absolute top-24 left-6 z-1000 flex flex-col gap-2">
-      {[
-        { icon: ZoomIn, action: () => map.zoomIn(), label: 'In' },
-        { icon: ZoomOut, action: () => map.zoomOut(), label: 'Out' },
-      ].map((btn, i) => (
-        <motion.button
+    <div className="absolute top-24 left-3 z-1000 flex flex-col gap-3 sm:left-6">
+      {controls.map((btn, i) => (
+        <button
           key={i}
-          whileHover={{ scale: 1.1, backgroundColor: '#ffffff' }}
-          whileTap={{ scale: 0.9 }}
           onClick={btn.action}
-          className="rounded-2xl border border-white/20 bg-white/90 p-3.5 shadow-xl backdrop-blur-md dark:border-gray-700 dark:bg-gray-800/90"
+          title={btn.label}
+          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/80 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-[1.08] active:scale-95 sm:h-12 sm:w-12 dark:bg-gray-800/80"
         >
-          <btn.icon size={20} className="text-gray-700 dark:text-white" />
-        </motion.button>
+          <btn.icon className="h-5 w-5 text-indigo-600 sm:h-6 sm:w-6 dark:text-indigo-400" />
+        </button>
       ))}
     </div>
   );
@@ -200,7 +204,7 @@ export function WeatherMap({
             />
           )}
 
-          <Marker position={position} icon={customIcon ?? undefined}>
+          <Marker position={position} icon={getCustomIcon()}>
             <Popup minWidth={220} className="weather-popup">
               <div className="p-2 text-center">
                 <p className="mb-1 text-[10px] font-bold tracking-[0.2em] text-indigo-600 uppercase">

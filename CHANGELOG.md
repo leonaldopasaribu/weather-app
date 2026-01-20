@@ -4,16 +4,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.7](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.6...v0.1.7) (2026-01-20)
 
-
 ### Features
 
-* add weather map with leaflet ([de84e52](https://github.com/leonaldopasaribu/weather-app/commit/de84e52d07d7693b8c96ddb58f345bcd0cb23969))
-* enhance NavigationHeader with animated transitions and improved button styles ([0a9835b](https://github.com/leonaldopasaribu/weather-app/commit/0a9835b4e1fc9b286d96f9459500629ce367243a))
-
+- add weather map with leaflet ([de84e52](https://github.com/leonaldopasaribu/weather-app/commit/de84e52d07d7693b8c96ddb58f345bcd0cb23969))
+- enhance NavigationHeader with animated transitions and improved button styles ([0a9835b](https://github.com/leonaldopasaribu/weather-app/commit/0a9835b4e1fc9b286d96f9459500629ce367243a))
 
 ### Chores
 
-* setup leaflet for map ([f5e9290](https://github.com/leonaldopasaribu/weather-app/commit/f5e9290e18def2038d2a4e2506faffce4a3d7e6a))
+- setup leaflet for map ([f5e9290](https://github.com/leonaldopasaribu/weather-app/commit/f5e9290e18def2038d2a4e2506faffce4a3d7e6a))
 
 ### [0.1.6](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.5...v0.1.6) (2026-01-19)
 

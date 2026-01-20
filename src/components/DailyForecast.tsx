@@ -66,9 +66,9 @@ export default function DailyForecast({ forecast }: DailyForecastProps) {
                 </div>
                 <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
                   <div
-                    className="absolute h-full rounded-full bg-gradient-to-r from-blue-400 to-red-400"
+                    className="absolute h-full rounded-full bg-linear-to-r from-blue-400 to-red-400"
                     style={{
-                      left: '20%', // Simulasi posisi rentang
+                      left: '20%',
                       right: '20%',
                     }}
                   />

@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { WeatherBackgroundUtil } from '@/src/utils';
 import {
   ThemeToggleButton,
@@ -12,9 +13,17 @@ import {
   DailyForecast,
   AirQuality,
   NavigationHeader,
-  WeatherMap,
 } from '@/src/components';
 import { useWeather, useTheme } from '@/src/hooks';
+
+// Dynamically import WeatherMap to avoid SSR issues with Leaflet
+const WeatherMap = dynamic(
+  () =>
+    import('@/src/components/WeatherMap').then((mod) => ({
+      default: mod.WeatherMap,
+    })),
+  { ssr: false }
+);
 
 export default function Home() {
   const {

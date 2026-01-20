@@ -11,7 +11,6 @@ interface AirQualityProps {
 export default function AirQuality({ airQuality }: AirQualityProps) {
   const { aqi, label, description, color } = airQuality;
 
-  // Kalkulasi persentase untuk progress bar (skala 1-5)
   const progressWidth = (aqi / 5) * 100;
 
   return (
@@ -19,7 +18,7 @@ export default function AirQuality({ airQuality }: AirQualityProps) {
       id="air-quality"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative overflow-hidden rounded-[2rem] bg-white/80 p-1 shadow-2xl backdrop-blur-xl dark:bg-gray-900/80"
+      className="group relative mb-8 overflow-hidden rounded-4xl bg-white/80 p-1 shadow-2xl backdrop-blur-xl dark:bg-gray-900/80"
     >
       {/* Glow Effect Background */}
       <div

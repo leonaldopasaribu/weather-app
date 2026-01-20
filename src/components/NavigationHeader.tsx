@@ -9,7 +9,7 @@ interface NavigationHeaderProps {
 }
 
 export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
-  const [activeSection, setActiveSection] = useState<string>('weather-map');
+  const [activeSection, setActiveSection] = useState<string>('hourly');
 
   const navItems = [
     { id: 'hourly', label: 'Hourly', Icon: Clock },
@@ -19,7 +19,7 @@ export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
   ];
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || typeof window === 'undefined') return;
 
     const handleScroll = () => {
       const sections = navItems.map((item) => ({
@@ -27,9 +27,8 @@ export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
         element: document.getElementById(item.id),
       }));
 
-      // Find which section is currently in view
       let currentSection = navItems[0].id;
-      const scrollPosition = window.scrollY + 200; // Offset for better detection
+      const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
         if (section.element) {
@@ -50,6 +49,8 @@ export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
   }, [isVisible, navItems]);
 
   const scrollToSection = (sectionId: string) => {
+    if (typeof window === 'undefined') return;
+
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {

@@ -31,11 +31,11 @@ export default function CurrentWeatherCard({
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="relative mb-8 w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-indigo-600 via-blue-600 to-blue-700 p-1 shadow-[0_20px_50px_rgba(79,70,229,0.4)] transition-all duration-500 hover:shadow-indigo-500/60"
+      className="relative mb-8 w-full overflow-hidden rounded-[2.5rem] bg-linear-to-br from-indigo-600 via-blue-600 to-blue-700 p-1 shadow-[0_20px_50px_rgba(79,70,229,0.4)] transition-all duration-500 hover:shadow-indigo-500/60"
     >
       {/* Decorative Animated Glows */}
       <div className="absolute -top-24 -left-24 h-64 w-64 animate-pulse rounded-full bg-white/20 blur-3xl" />
-      <div className="absolute -right-24 -bottom-24 h-64 w-64 animate-bounce rounded-full bg-indigo-400/20 blur-3xl duration-[5000ms]" />
+      <div className="absolute -right-24 -bottom-24 h-64 w-64 animate-bounce rounded-full bg-indigo-400/20 blur-3xl duration-5000" />
 
       <div className="relative z-10 flex flex-col p-6 sm:p-10 md:p-12">
         {/* Header: Location & Time */}
@@ -83,7 +83,7 @@ export default function CurrentWeatherCard({
               </span>
               <span className="mt-4 text-4xl font-light text-blue-200">°C</span>
             </div>
-            <div className="mt-[-10px] flex gap-4">
+            <div className="-mt-2.5 flex gap-4">
               <div className="flex items-center gap-1 text-blue-100/80">
                 <ArrowDown size={14} />
                 <span className="text-sm font-bold">
@@ -101,7 +101,7 @@ export default function CurrentWeatherCard({
         </div>
 
         {/* Info Grid: Metrics */}
-        <div className="grid grid-cols-2 gap-4 rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-inner backdrop-blur-xl md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 rounded-4xl border border-white/10 bg-white/10 p-6 shadow-inner backdrop-blur-xl md:grid-cols-4">
           <MetricItem
             icon={<Thermometer size={18} />}
             label="Feels Like"
