@@ -364,8 +364,9 @@ describe('useWeather', () => {
         },
       };
 
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) =
-        jest.fn((success) => success(mockPosition));
+      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
+        (success) => success(mockPosition)
+      );
 
       mockFetchWeatherByCoords.mockResolvedValue(mockWeatherData);
       mockFetchForecastByCoords.mockResolvedValue(mockForecastData);
@@ -435,8 +436,9 @@ describe('useWeather', () => {
         },
       };
 
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) =
-        jest.fn((success) => success(mockPosition));
+      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
+        (success) => success(mockPosition)
+      );
 
       const errorMessage = 'API error';
       mockFetchWeatherByCoords.mockRejectedValue(new Error(errorMessage));
@@ -466,8 +468,9 @@ describe('useWeather', () => {
         },
       };
 
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) =
-        jest.fn((success) => success(mockPosition));
+      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
+        (success) => success(mockPosition)
+      );
 
       mockFetchWeatherByCoords.mockRejectedValue('Unknown error');
       mockFetchForecastByCoords.mockResolvedValue(mockForecastData);
@@ -494,10 +497,9 @@ describe('useWeather', () => {
         },
       };
 
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) =
-        jest.fn((success) =>
-          setTimeout(() => success(mockPosition), 100)
-        );
+      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
+        (success) => setTimeout(() => success(mockPosition), 100)
+      );
 
       mockFetchWeatherByCoords.mockResolvedValue(mockWeatherData);
       mockFetchForecastByCoords.mockResolvedValue(mockForecastData);
@@ -546,8 +548,9 @@ describe('useWeather', () => {
       expect(result.current.error).toBe('City not found');
 
       // Now use geolocation successfully
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) =
-        jest.fn((success) => success(mockPosition));
+      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
+        (success) => success(mockPosition)
+      );
 
       mockFetchWeatherByCoords.mockResolvedValue(mockWeatherData);
       mockFetchForecastByCoords.mockResolvedValue(mockForecastData);

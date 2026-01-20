@@ -2,20 +2,52 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Calendar, Wind } from 'lucide-react';
+import { Clock, Calendar, Wind, Map } from 'lucide-react';
 
 interface NavigationHeaderProps {
   isVisible: boolean;
 }
 
 export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
-  const [activeSection, setActiveSection] = useState<string>('hourly');
+  const [activeSection, setActiveSection] = useState<string>('weather-map');
 
   const navItems = [
     { id: 'hourly', label: 'Hourly', Icon: Clock },
     { id: 'daily', label: 'Daily', Icon: Calendar },
     { id: 'air-quality', label: 'Air Quality', Icon: Wind },
+    { id: 'weather-map', label: 'Map', Icon: Map },
   ];
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const handleScroll = () => {
+      const sections = navItems.map((item) => ({
+        id: item.id,
+        element: document.getElementById(item.id),
+      }));
+
+      // Find which section is currently in view
+      let currentSection = navItems[0].id;
+      const scrollPosition = window.scrollY + 200; // Offset for better detection
+
+      for (const section of sections) {
+        if (section.element) {
+          const offsetTop = section.element.offsetTop;
+          if (scrollPosition >= offsetTop) {
+            currentSection = section.id;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once on mount
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isVisible, navItems]);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);

@@ -12,6 +12,7 @@ import {
   DailyForecast,
   AirQuality,
   NavigationHeader,
+  WeatherMap,
 } from '@/src/components';
 import { useWeather, useTheme } from '@/src/hooks';
 
@@ -102,6 +103,16 @@ export default function Home() {
           )}
 
           {weather && airQuality && <AirQuality airQuality={airQuality} />}
+
+          {weather && (
+            <WeatherMap
+              lat={weather.coord.lat}
+              lon={weather.coord.lon}
+              cityName={weather.name}
+              temperature={weather.main.temp}
+              description={weather.weather[0].description}
+            />
+          )}
         </div>
       </main>
     </div>

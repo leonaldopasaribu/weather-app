@@ -110,7 +110,8 @@ export function useWeather(): UseWeatherReturn {
               position.coords.latitude,
               position.coords.longitude
             );
-            const airQualityInfo = WeatherUtil.getAirQualityInfo(airPollutionData);
+            const airQualityInfo =
+              WeatherUtil.getAirQualityInfo(airPollutionData);
             setAirQuality(airQualityInfo);
           } catch {
             // If air quality fetch fails, just set it to null
@@ -118,9 +119,7 @@ export function useWeather(): UseWeatherReturn {
           }
         } catch (err) {
           setError(
-            err instanceof Error
-              ? err.message
-              : 'Unable to fetch weather data'
+            err instanceof Error ? err.message : 'Unable to fetch weather data'
           );
           setWeather(null);
           setForecast([]);
@@ -132,19 +131,21 @@ export function useWeather(): UseWeatherReturn {
       },
       (error) => {
         let errorMessage = 'Unable to retrieve your location';
-        
+
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            errorMessage = 'Location permission denied. Please enable location access in your browser settings.';
+            errorMessage =
+              'Location permission denied. Please enable location access in your browser settings.';
             break;
           case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information is unavailable. Please try again.';
+            errorMessage =
+              'Location information is unavailable. Please try again.';
             break;
           case error.TIMEOUT:
             errorMessage = 'Location request timed out. Please try again.';
             break;
         }
-        
+
         setError(errorMessage);
         setIsLoading(false);
       },

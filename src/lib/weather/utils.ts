@@ -38,17 +38,20 @@ export class WeatherUtil {
   }
 
   static getForecastData(data: ForecastData): DailyForecast[] {
-    const dailyData: Record<string, {
-      date: string;
-      day: string;
-      temp_min: number;
-      temp_max: number;
-      description: string;
-      icon: string;
-      humidity: number;
-      wind_speed: number;
-      count: number;
-    }> = {};
+    const dailyData: Record<
+      string,
+      {
+        date: string;
+        day: string;
+        temp_min: number;
+        temp_max: number;
+        description: string;
+        icon: string;
+        humidity: number;
+        wind_speed: number;
+        count: number;
+      }
+    > = {};
 
     data.list.forEach((item) => {
       const date = new Date(item.dt * 1000);
@@ -107,30 +110,38 @@ export class WeatherUtil {
     const airData = data.list[0];
     const aqi = airData.main.aqi;
 
-    const aqiInfo: Record<number, { label: string; description: string; color: string }> = {
+    const aqiInfo: Record<
+      number,
+      { label: string; description: string; color: string }
+    > = {
       1: {
         label: 'Good',
-        description: 'Air quality is satisfactory, and air pollution poses little or no risk.',
+        description:
+          'Air quality is satisfactory, and air pollution poses little or no risk.',
         color: 'bg-green-500',
       },
       2: {
         label: 'Fair',
-        description: 'Air quality is acceptable. However, there may be a risk for some people.',
+        description:
+          'Air quality is acceptable. However, there may be a risk for some people.',
         color: 'bg-lime-500',
       },
       3: {
         label: 'Moderate',
-        description: 'Members of sensitive groups may experience health effects.',
+        description:
+          'Members of sensitive groups may experience health effects.',
         color: 'bg-yellow-500',
       },
       4: {
         label: 'Poor',
-        description: 'Health alert: everyone may experience more serious health effects.',
+        description:
+          'Health alert: everyone may experience more serious health effects.',
         color: 'bg-orange-500',
       },
       5: {
         label: 'Very Poor',
-        description: 'Health warning of emergency conditions. Everyone is more likely to be affected.',
+        description:
+          'Health warning of emergency conditions. Everyone is more likely to be affected.',
         color: 'bg-red-500',
       },
     };

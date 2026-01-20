@@ -15,9 +15,11 @@ A modern, responsive weather application built with Next.js that provides real-t
 ## 📸 Screenshots
 
 ### Desktop View
+
 <img width="1470" height="688" alt="Desktop Weather App" src="https://github.com/user-attachments/assets/dc8e381c-e5ea-4740-960a-2e8c4d41ab49" />
 
 ### Mobile View
+
 <div align="center">
   <img src="https://github.com/user-attachments/assets/69cec894-282c-4004-8a2f-cb64145c0c0f" alt="Mobile Weather App" width="30%" />
   <img src="https://github.com/user-attachments/assets/8a14245d-e8cb-4f76-ad39-42a285c892f8" alt="Mobile Weather Details" width="30%" />
@@ -43,12 +45,14 @@ A modern, responsive weather application built with Next.js that provides real-t
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/leonaldopasaribu/weather-app.git
    cd weather-app
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    # or
@@ -58,14 +62,16 @@ A modern, responsive weather application built with Next.js that provides real-t
    ```
 
 3. **Set up environment variables**
-   
+
    Create a `.env.local` file in the root directory:
+
    ```env
    # Add your API keys here
    NEXT_PUBLIC_WEATHER_API_KEY=your_api_key_here
    ```
 
 4. **Run the development server**
+
    ```bash
    pnpm dev
    # or
@@ -75,7 +81,7 @@ A modern, responsive weather application built with Next.js that provides real-t
    ```
 
 5. **Open your browser**
-   
+
    Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
 
 ## 🧪 Testing
@@ -105,6 +111,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 ```
 
 **Types:**
+
 - `feat:` - A new feature
 - `fix:` - A bug fix
 - `docs:` - Documentation changes
@@ -115,6 +122,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 - `chore:` - Build process or auxiliary tool changes
 
 **Examples:**
+
 ```bash
 feat(air-quality): add Air Quality API integration
 fix(weather): correct temperature display issue
@@ -152,6 +160,7 @@ git push --follow-tags origin main
 ## 📝 Development
 
 The application uses:
+
 - **App Router** - Next.js 13+ app directory structure
 - **TypeScript** - Full type safety across the codebase
 - **Jest** - Unit and integration testing
@@ -180,6 +189,7 @@ To learn more about the technologies used in this project:
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
+
 1. Fork the project
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)

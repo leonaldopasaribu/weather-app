@@ -8,3 +8,4 @@ export { default as HourlyForecast } from './HourlyForecast';
 export { default as CurrentWeatherCard } from './CurrentWeatherCard';
 export { default as DailyForecast } from './DailyForecast';
 export { NavigationHeader } from './NavigationHeader';
+export { WeatherMap } from './WeatherMap';
