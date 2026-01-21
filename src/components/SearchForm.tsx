@@ -1,7 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { Loader2, MapPin, Search, Navigation } from 'lucide-react';
+import { useDebounce } from '@/src/hooks';
+import { fetchLocationSuggestions } from '@/src/lib/weather/api';
+import type { LocationSuggestion } from '@/src/lib/weather/types';
+import LocationAutocomplete from './LocationAutocomplete';
 
 interface SearchFormProps {
   city: string;
@@ -9,6 +13,7 @@ interface SearchFormProps {
   onCityChange: (city: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   onGetCurrentLocation: () => void;
+  onLocationSelect?: (lat: number, lon: number, name: string) => void;
 }
 
 export default function SearchForm({
@@ -17,10 +22,74 @@ export default function SearchForm({
   onCityChange,
   onSubmit,
   onGetCurrentLocation,
+  onLocationSelect,
 }: SearchFormProps) {
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const debouncedCity = useDebounce(city, 300);
+
+  // Fetch suggestions when debounced city changes
+  useEffect(() => {
+    const loadSuggestions = async () => {
+      if (!debouncedCity || debouncedCity.length < 2) {
+        setSuggestions([]);
+        setShowSuggestions(false);
+        return;
+      }
+
+      setIsLoadingSuggestions(true);
+      setShowSuggestions(true);
+      try {
+        const results = await fetchLocationSuggestions(debouncedCity, 8);
+        setSuggestions(results);
+      } catch (error) {
+        console.error('Error loading suggestions:', error);
+        setSuggestions([]);
+      } finally {
+        setIsLoadingSuggestions(false);
+      }
+    };
+
+    loadSuggestions();
+  }, [debouncedCity]);
+
+  const handleLocationSelect = (location: LocationSuggestion) => {
+    onCityChange(location.displayName);
+    setShowSuggestions(false);
+    setSuggestions([]);
+
+    if (onLocationSelect) {
+      onLocationSelect(location.lat, location.lon, location.name);
+    }
+  };
+
+  const handleInputChange = (value: string) => {
+    onCityChange(value);
+    if (value.length >= 2) {
+      setShowSuggestions(true);
+    }
+  };
+
+  const handleInputFocus = () => {
+    if (city.length >= 2 && suggestions.length > 0) {
+      setShowSuggestions(true);
+    }
+  };
+
+  const handleInputBlur = () => {
+    // Delay to allow click on suggestion
+    setTimeout(() => {
+      setShowSuggestions(false);
+    }, 200);
+  };
   return (
     <div className="mx-auto mb-10 w-full max-w-2xl px-2">
-      <form onSubmit={onSubmit} className="relative">
+      <form
+        onSubmit={onSubmit}
+        className="relative z-50"
+        style={{ isolation: 'isolate' }}
+      >
         <div className="group relative flex items-center transition-all duration-500">
           {/* Label Floating / Icon Decor */}
           <div className="absolute left-6 z-10 text-gray-400 transition-colors duration-300 group-focus-within:text-indigo-500">
@@ -31,8 +100,11 @@ export default function SearchForm({
             id="city-search"
             type="text"
             value={city}
-            onChange={(e) => onCityChange(e.target.value)}
-            placeholder="Search city..."
+            onChange={(e) => handleInputChange(e.target.value)}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            placeholder="Search city, district, or location..."
+            autoComplete="off"
             className="w-full rounded-[2.5rem] border-0 bg-white/40 py-5 pr-32 pl-16 text-xl font-medium tracking-tight text-gray-800 ring-1 ring-gray-200/50 backdrop-blur-3xl transition-all placeholder:text-gray-400 focus:bg-white focus:ring-4 focus:ring-indigo-500/10 dark:bg-gray-900/40 dark:text-white dark:ring-gray-700/50 dark:focus:bg-gray-900 dark:focus:ring-indigo-500/20"
           />
 
@@ -64,6 +136,14 @@ export default function SearchForm({
             </button>
           </div>
         </div>
+
+        {/* Location Autocomplete Dropdown */}
+        <LocationAutocomplete
+          suggestions={suggestions}
+          isLoading={isLoadingSuggestions}
+          onSelect={handleLocationSelect}
+          isVisible={showSuggestions}
+        />
 
         {/* Subtle Decorative Hint */}
         <div className="mt-4 flex justify-center gap-6 opacity-40">

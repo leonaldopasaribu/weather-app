@@ -25,6 +25,7 @@ interface UseWeatherReturn {
   error: string;
   handleSearch: (e: React.FormEvent) => Promise<void>;
   handleGetCurrentLocation: () => void;
+  handleLocationSelect: (lat: number, lon: number, name: string) => Promise<void>;
 }
 
 export function useWeather(): UseWeatherReturn {
@@ -157,6 +158,42 @@ export function useWeather(): UseWeatherReturn {
     );
   };
 
+  const handleLocationSelect = async (lat: number, lon: number, name: string) => {
+    setIsLoading(true);
+    setError('');
+    setCity(name);
+
+    try {
+      const [weatherData, forecastData] = await Promise.all([
+        fetchWeatherByCoords(lat, lon),
+        fetchForecastByCoords(lat, lon),
+      ]);
+      setWeather(weatherData);
+      setForecast(WeatherUtil.getForecastData(forecastData));
+      setHourlyForecast(WeatherUtil.getHourlyForecast(forecastData));
+
+      // Fetch air quality data using coordinates
+      try {
+        const airPollutionData = await fetchAirPollutionByCoords(lat, lon);
+        const airQualityInfo = WeatherUtil.getAirQualityInfo(airPollutionData);
+        setAirQuality(airQualityInfo);
+      } catch {
+        // If air quality fetch fails, just set it to null
+        setAirQuality(null);
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : 'Unable to fetch weather data'
+      );
+      setWeather(null);
+      setForecast([]);
+      setHourlyForecast([]);
+      setAirQuality(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     city,
     setCity,
@@ -168,5 +205,6 @@ export function useWeather(): UseWeatherReturn {
     error,
     handleSearch,
     handleGetCurrentLocation,
+    handleLocationSelect,
   };
 }

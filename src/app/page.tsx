@@ -37,6 +37,7 @@ export default function Home() {
     error,
     handleSearch,
     handleGetCurrentLocation,
+    handleLocationSelect,
   } = useWeather();
 
   const { isDark, toggleTheme } = useTheme();
@@ -58,7 +59,7 @@ export default function Home() {
         {!weather && !isLoading && <WelcomeHeader />}
 
         <div className="w-full max-w-7xl px-2 sm:px-4">
-          <div className="mb-6 rounded-2xl bg-white/95 p-4 shadow-[0_20px_50px_rgba(8,112,184,0.7)] backdrop-blur-md sm:mb-8 sm:rounded-4xl sm:p-6 md:p-8 lg:p-10 dark:bg-gray-900/95 dark:shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+          <div className="relative z-50 mb-6 rounded-2xl bg-white/95 p-4 shadow-[0_20px_50px_rgba(8,112,184,0.7)] backdrop-blur-md sm:mb-8 sm:rounded-4xl sm:p-6 md:p-8 lg:p-10 dark:bg-gray-900/95 dark:shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
             {weather && (
               <div className="mb-6 text-center sm:mb-8">
                 <h1 className="text-2xl font-extrabold text-gray-800 sm:text-3xl md:text-4xl dark:text-white">
@@ -76,6 +77,7 @@ export default function Home() {
               onCityChange={setCity}
               onSubmit={handleSearch}
               onGetCurrentLocation={handleGetCurrentLocation}
+              onLocationSelect={handleLocationSelect}
             />
 
             {error && <ErrorMessage message={error} />}

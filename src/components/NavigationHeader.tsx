@@ -68,7 +68,7 @@ export function NavigationHeader({ isVisible }: NavigationHeaderProps) {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -50, opacity: 0 }}
-          className="sticky top-6 z-50 mb-10 flex justify-center px-4"
+          className="sticky top-6 z-40 mb-10 flex justify-center px-4"
         >
           <div className="relative flex items-center gap-1 overflow-hidden rounded-4xl bg-white/70 p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] ring-1 ring-black/5 backdrop-blur-2xl dark:bg-gray-900/80 dark:ring-white/10">
             {navItems.map((item) => {

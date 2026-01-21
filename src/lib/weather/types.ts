@@ -112,3 +112,22 @@ export interface AirQualityInfo {
     nh3: number;
   };
 }
+
+// Geocoding API types for autocomplete
+export interface GeocodingLocation {
+  name: string;
+  local_names?: Record<string, string>;
+  lat: number;
+  lon: number;
+  country: string;
+  state?: string;
+}
+
+export interface LocationSuggestion {
+  name: string;
+  state?: string;
+  country: string;
+  lat: number;
+  lon: number;
+  displayName: string;
+}
