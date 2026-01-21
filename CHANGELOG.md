@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.7...v0.1.8) (2026-01-21)
+
+
+### Features
+
+* add location autocomple component ([a0f2286](https://github.com/leonaldopasaribu/weather-app/commit/a0f228672b867eec3b30ac43fa041ad5f25cbc49))
+* add new icons for app branding ([6afe9c9](https://github.com/leonaldopasaribu/weather-app/commit/6afe9c9f8054cc614a5264f30f83c632a4581a55))
+
+
+### Bug Fixes
+
+* resolve error build ([1091bd2](https://github.com/leonaldopasaribu/weather-app/commit/1091bd2990d279aa8a6bd769d267ac1b5274f06f))
+
 ### [0.1.7](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.6...v0.1.7) (2026-01-20)
 
 ### Features
