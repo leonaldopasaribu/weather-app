@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.8...v0.1.9) (2026-01-26)
+
+
+### Features
+
+* add @vercel/speed-insights integration to layout ([da28853](https://github.com/leonaldopasaribu/weather-app/commit/da2885309e0d2c033de14b98c215d5c353e9e0c6))
+
 ### [0.1.8](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.7...v0.1.8) (2026-01-21)
 
 
