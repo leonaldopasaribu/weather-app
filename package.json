@@ -1,6 +1,6 @@
 {
   "name": "weather-app",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,15 +11,23 @@
     "format:check": "prettier --check .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch",
+    "release:first": "standard-version --first-release"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
     "axios": "^1.13.2",
+    "framer-motion": "^12.26.2",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.552.0",
     "next": "16.0.10",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-leaflet": "^5.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -27,6 +35,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^20",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
@@ -37,6 +46,7 @@
     "jest-environment-jsdom": "^30.2.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
+    "standard-version": "^9.5.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
@@ -44,7 +54,10 @@
   "pnpm": {
     "overrides": {
       "@types/react": "19.2.7",
-      "@types/react-dom": "19.2.3"
+      "@types/react-dom": "19.2.3",
+      "js-yaml@<3.14.2": ">=3.14.2",
+      "js-yaml@>=4.0.0 <4.1.1": ">=4.1.1",
+      "glob@>=10.2.0 <10.5.0": ">=10.5.0"
     }
   }
 }

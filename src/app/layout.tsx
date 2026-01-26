@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
+import 'leaflet/dist/leaflet.css';
+
+export const dynamic = 'force-dynamic';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,14 +50,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://weather-app-leonaldo.vercel.app'),
+  metadataBase: new URL('https://weather-app-leonaldo-pasaribu.vercel.app'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://weather-app-leonaldo.vercel.app',
+    url: 'https://weather-app-leonaldo-pasaribu.vercel.app',
     title:
       'The Weather Channel - Accurate Weather Forecasts & Real-Time Updates',
     description:
@@ -96,7 +99,7 @@ export default function RootLayout({
     name: 'The Weather Channel',
     description:
       'Get accurate weather forecasts, real-time updates, and 7-day weather predictions for any city worldwide.',
-    url: 'https://weather-app-leonaldo.vercel.app',
+    url: 'https://weather-app-leonaldo-pasaribu.vercel.app',
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web',
     offers: {

@@ -1,8 +1,15 @@
 import axios, { HttpStatusCode, type AxiosError } from 'axios';
-import type { WeatherData, ForecastData } from './types';
+import type {
+  WeatherData,
+  ForecastData,
+  AirPollutionData,
+  GeocodingLocation,
+  LocationSuggestion,
+} from './types';
+import { env } from '../env';
 
-const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
-const BASE_URL = process.env.NEXT_PUBLIC_OPENWEATHER_API_URL;
+const API_KEY = env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+const BASE_URL = env.NEXT_PUBLIC_OPENWEATHER_API_URL;
 
 const weatherApi = axios.create({
   baseURL: BASE_URL,
@@ -77,6 +84,64 @@ export async function fetchForecastByCoords(
   return data;
 }
 
+export async function fetchAirPollutionByCoords(
+  lat: number,
+  lon: number
+): Promise<AirPollutionData> {
+  const { data } = await weatherApi.get<AirPollutionData>(
+    '/data/2.5/air_pollution',
+    {
+      params: { lat, lon },
+    }
+  );
+
+  return data;
+}
+
 export function fetchWeatherIconUrl(icon: string): string {
   return `https://openweathermap.org/img/wn/${icon}@2x.png`;
+}
+
+/**
+ * Fetch location suggestions using OpenWeather Geocoding API
+ * @param query - Search query (city name, district, etc.)
+ * @param limit - Maximum number of results (default: 5)
+ * @returns Array of location suggestions
+ */
+export async function fetchLocationSuggestions(
+  query: string,
+  limit: number = 5
+): Promise<LocationSuggestion[]> {
+  if (!query.trim()) return [];
+
+  try {
+    const { data } = await weatherApi.get<GeocodingLocation[]>(
+      '/geo/1.0/direct',
+      {
+        params: {
+          q: query,
+          limit,
+        },
+      }
+    );
+
+    return data.map((location) => {
+      // Create display name with state if available
+      const parts = [location.name];
+      if (location.state) parts.push(location.state);
+      parts.push(location.country);
+
+      return {
+        name: location.name,
+        state: location.state,
+        country: location.country,
+        lat: location.lat,
+        lon: location.lon,
+        displayName: parts.join(', '),
+      };
+    });
+  } catch (error) {
+    console.error('Error fetching location suggestions:', error);
+    return [];
+  }
 }
