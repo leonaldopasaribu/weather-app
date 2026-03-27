@@ -210,5 +210,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 <div align="center">
-  Made with ❤️ using Next.js
+  Made with ❤️ using Next.js 
 </div>
