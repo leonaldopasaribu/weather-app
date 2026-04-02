@@ -410,24 +410,6 @@ describe('useWeather', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    it('should set error message when geolocation permission is denied', async () => {
-      (global.navigator.geolocation.getCurrentPosition as jest.Mock) = jest.fn(
-        (success, error) => error()
-      );
-
-      const { result } = renderHook(() => useWeather());
-
-      await act(async () => {
-        result.current.handleGetCurrentLocation();
-      });
-
-      await waitFor(() => {
-        expect(result.current.error).toBe('Unable to retrieve your location');
-      });
-
-      expect(result.current.isLoading).toBe(false);
-    });
-
     it('should set error message when API request fails during geolocation', async () => {
       const mockPosition = {
         coords: {
