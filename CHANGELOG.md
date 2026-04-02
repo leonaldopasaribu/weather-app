@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.10...v0.1.11) (2026-04-02)
+
+
+### Bug Fixes
+
+* add a new line for better readability in README.md ([bc2c2cb](https://github.com/leonaldopasaribu/weather-app/commit/bc2c2cb96e01d1efced2ab32740fa33ba256a7fe))
+* update @types/react version to 19.2.7 in pnpm-lock.yaml ([e8116a6](https://github.com/leonaldopasaribu/weather-app/commit/e8116a6a66f6dbbc6628a403d3657ec0eac5fca1))
+
+
+### Documentation
+
+* update readme.md ([b0b9c10](https://github.com/leonaldopasaribu/weather-app/commit/b0b9c1063d8eb838d44eb02e6013160f597ce082))
+
+
+### Code Refactoring
+
+* resolve tailwind class warning ([114e09a](https://github.com/leonaldopasaribu/weather-app/commit/114e09a7aa7a127df71811c410dbe9f096d7390d))
+
+
+### Tests
+
+* resolve unit test error ([98264ad](https://github.com/leonaldopasaribu/weather-app/commit/98264add6312f54079b126398a20ba122a5c99df))
+
+
+### Chores
+
+* update package to latest ([8bb765a](https://github.com/leonaldopasaribu/weather-app/commit/8bb765ad4ca6ab5f538f3433948ebb0aad30e53d))
+* update package to latest ([bba884d](https://github.com/leonaldopasaribu/weather-app/commit/bba884d518774b4cb569d8594d326d91b4f76ba2))
+
 ### [0.1.10](https://github.com/leonaldopasaribu/weather-app/compare/v0.1.9...v0.1.10) (2026-03-16)
 
 
