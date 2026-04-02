@@ -56,7 +56,7 @@ export default function WelcomeHeader() {
         className="flex items-center gap-3"
       >
         <div className="h-px w-8 bg-linear-to-r from-transparent to-white/30" />
-        <p className="max-w-[280px] text-xs font-bold tracking-[0.3em] text-blue-100/80 uppercase sm:max-w-none sm:text-sm">
+        <p className="max-w-70 text-xs font-bold tracking-[0.3em] text-blue-100/80 uppercase sm:max-w-none sm:text-sm">
           Precision Metrics • Real-time Data
         </p>
         <div className="h-px w-8 bg-linear-to-l from-transparent to-white/30" />

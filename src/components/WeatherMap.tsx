@@ -113,7 +113,7 @@ export function WeatherMap({
 
   if (!mounted)
     return (
-      <div className="h-[550px] w-full animate-pulse rounded-[2.5rem] bg-gray-100 dark:bg-gray-800" />
+      <div className="h-137.5 w-full animate-pulse rounded-[2.5rem] bg-gray-100 dark:bg-gray-800" />
     );
 
   return (
@@ -175,7 +175,7 @@ export function WeatherMap({
       </div>
 
       {/* 3. Map Content */}
-      <div className="h-[600px] w-full overflow-hidden rounded-[2.2rem]">
+      <div className="h-150 w-full overflow-hidden rounded-[2.2rem]">
         <MapContainer
           center={position}
           zoom={8}
