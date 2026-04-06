@@ -71,6 +71,10 @@ describe('useWeather', () => {
     wind: {
       speed: 5,
     },
+    coord: {
+      lat: 0,
+      lon: 0
+    }
   };
 
   const mockForecastData: ForecastData = {
